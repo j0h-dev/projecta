@@ -3,11 +3,12 @@ import { publicProcedure } from '../lib/orpc'
 
 import { lazy } from '@orpc/server'
 
-export const appRouter = {
+export const appRouter = publicProcedure.router({
   healthCheck: publicProcedure.handler(() => {
     return 'OK'
   }),
   organization: lazy(() => import('./organization')),
-}
+})
+
 export type AppRouter = typeof appRouter
 export type AppRouterClient = RouterClient<typeof appRouter>
